@@ -31,16 +31,9 @@ const Navbar = () => {
           <Link to="/movies" className="link"><span>Movies</span></Link>
 
           <Link to="/series" className="link"><span>Series</span></Link>
-
-          <Link to="/" className="link"><span>Anime</span></Link>
-          <Link to="/" className="link"><span>Drama</span></Link>
-          <Link to="/" className="link"><span>Favourites</span></Link>
-
         </div>
         
         <div className="rightside">
-          <Search className="icons" />
-          <Notifications className="icons" />
           <img src="assets/account_pic.png" alt="" />
 
           <div className="profile-options">

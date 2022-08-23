@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import './listitems.scss';
 
 export default function Listitems({ index, item }) {
-  console.log("liitem", index, item)
+  // console.log("liitem", index, item)
   const [isHovered, setIsHovered] = useState(false);
   const [liItem, setItem] = useState({});
   //const trailer = "assets/dummy.mp4";
@@ -17,18 +17,20 @@ export default function Listitems({ index, item }) {
       try {
         const res = await axios.get("/movies/search/" + item, {
           headers: {
-            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZTIyN2E5OWFhYWI1NzRhNzhlMjhiNiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NTk0OTQzNzMsImV4cCI6MTY2MDA5OTE3M30.U8lFV8am4gzwRYf8ojabvlWrfhLfE0BHvY0Sus0fmdc"
-
+            token:
+              "Bearer "+JSON.parse(localStorage.getItem("user")).split(" ")[1] ,
+              
           },
         });
         setItem(res.data);
-        console.log("mvdata", res.data);
+        // console.log("mvdata", res.data);
       } catch (err) {
         console.log(err);
       }
     };
     findMovie();
   }, [item]);
+  //console.log("liItem data",liItem);
   return (
     <Link to={{ pathname: "/watch", liItem: liItem }}>
       <div>
@@ -39,7 +41,7 @@ export default function Listitems({ index, item }) {
           style={{ left: isHovered && index * (265) + (index * 9.5) }}
         >
           {/* <img src="assets/movie3.jpg" alt="" /> */}
-          <img src={liItem.img} alt="" />
+          <img src={liItem?.img} alt="" />
           {isHovered && (
             <>
               <video src={liItem.movieTrailer} autoPlay={true} loop muted />
@@ -49,8 +51,9 @@ export default function Listitems({ index, item }) {
                   <ThumbUpOutlined className='icon' />
                 </div>
                 <div className='more_info'>
+                <span className='mov_title'>{liItem.movieTitle}</span>
                   <span>{liItem.duration}</span>
-                  <span className='age_limit'>{liItem.ageLimit}</span>
+                  
                 </div>
                 <div className='description'>
                   {liItem.movieDesc}

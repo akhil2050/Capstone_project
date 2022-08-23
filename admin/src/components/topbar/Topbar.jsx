@@ -1,8 +1,11 @@
-import React from "react";
+import {React, useContext} from "react";
 import "./topbar.scss";
 import { Settings } from "@material-ui/icons";
+import { logout } from "../../context/ContextAuth/AuthActions";
+import { ContextAuth } from "../../context/ContextAuth/ContextAuth";
 
 export default function Topbar() {
+  const { dispatch } = useContext(ContextAuth);
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -19,7 +22,10 @@ export default function Topbar() {
             <Settings className="icons" />
             <div className="optioncls">
               <span>Profile</span>
-              <span>Logout</span>
+              <span onClick={
+                () => dispatch(logout())
+              }
+              >Logout</span>
             </div>
 
           </div>

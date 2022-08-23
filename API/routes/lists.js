@@ -7,6 +7,7 @@ const token_verify = require("../token_verify");
 //create list
 
 router.post("/", token_verify, async (req, res) => {
+  // router.post("/",  async (req, res) => {
     const newMovielist = new List(req.body);
     try {
       const currentlist = await newMovielist.save();
@@ -19,6 +20,7 @@ router.post("/", token_verify, async (req, res) => {
 //delete list
 
 router.delete("/:id", token_verify, async (req, res) => {
+  // router.delete("/:id", async (req, res) => {
     try {
       await List.findByIdAndDelete(req.params.id);
       res.status(201).json("The list is deleted.");
@@ -30,23 +32,36 @@ router.delete("/:id", token_verify, async (req, res) => {
 //get list
 
 router.get("/", token_verify, async (req, res) => {
+  // router.get("/", async (req, res) => {
   const queryType = req.query.type;
   const queryGenre = req.query.genre;
+  console.log("inside api",queryType,queryGenre );
   let list = [];
   try {
     if (queryType) {
-      if (queryGenre) {
+      if (queryGenre && queryGenre !="Genre") {
+        console.log("inside genre");
         list = await List.aggregate([
           { $sample: { size: 10 } },
           { $match: { type: queryType, genre: queryGenre } },
         ]);
-      } else {
+      } 
+      else if (queryGenre && queryGenre =="Genre") {
+        console.log("inside genre");
         list = await List.aggregate([
           { $sample: { size: 10 } },
           { $match: { type: queryType } },
         ]);
       }
-    } else {
+      else  {
+        console.log("else genre");
+        list = await List.aggregate([
+          { $sample: { size: 10 } },
+          { $match: { type: queryType } },
+        ]);
+      }
+    } else{
+      console.log("final else ");
       list = await List.aggregate([{ $sample: { size: 10 } }]);
     }
     console.log("list api",list)
@@ -59,7 +74,8 @@ router.get("/", token_verify, async (req, res) => {
 /**
  * Update movie
  */
- router.put("/:id", async (req, res) => {
+ router.put("/:id", token_verify, async (req, res) => {
+  console.log("api updtae",req);
   try {
     const updateList = await List.findByIdAndUpdate(
       req.params.id,

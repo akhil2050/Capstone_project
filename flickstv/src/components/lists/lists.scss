@@ -1,7 +1,12 @@
+@import "../../App.scss";
 .lists {
     width: 100%;
     margin-top: 140px;
   
+    @include mobile {
+     margin-top: 100px;
+    }
+
     .liTitle {
       color: white;
       font-size: 22px;
@@ -24,6 +29,10 @@
             margin: auto;
             cursor: pointer;
 
+            @include mobile {
+              width: 30px;
+            }
+
             &.left {
                 left: 0;
               }
@@ -39,6 +48,10 @@
             width: max-content; 
             transform: translateX(0px);
             transition: all .2s ease;
+
+            @include mobile {
+              margin-left: 20px;
+            }
         }
     }
 }

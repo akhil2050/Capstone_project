@@ -5,7 +5,7 @@ import { PlayArrow, InfoOutlined } from "@material-ui/icons";
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-export default function Banner({ type }) {
+export default function Banner({ type, setGenre}) {
 
     const [itmContent, setRandomContent] = useState({});
 
@@ -14,13 +14,15 @@ export default function Banner({ type }) {
             try {
                 const res = await axios.get(`movies/scattered?type=${type}`, {
                     headers: {
-                        token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZTIyN2E5OWFhYWI1NzRhNzhlMjhiNiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NTk0OTQzNzMsImV4cCI6MTY2MDA5OTE3M30.U8lFV8am4gzwRYf8ojabvlWrfhLfE0BHvY0Sus0fmdc"
-
-                    },
+                        token:
+                          "Bearer "+JSON.parse(localStorage.getItem("user")).split(" ")[1] ,
+                          
+                      },
                 });
+                
 
                 setRandomContent(res.data[0]);
-                console.log("data is", res.data);
+                // console.log("data is", res.data);
             }
             catch (err) {
                 console.log(err);
@@ -34,11 +36,13 @@ export default function Banner({ type }) {
             {type && (
                 <div className="category">
                     <span>{type === "movies" ? "Movies" : "Series"}</span>
+
                     <select
                         name="genre"
                         id="genre"
+                        onChange={(e) => setGenre(e.target.value)}
                     >
-                        <option>Genre</option>
+                        <option >Genre</option>
                         <option value="comedy">Comedy</option>
                         <option value="horror">Horror</option>
                         <option value="romance">Romance</option>
@@ -46,6 +50,7 @@ export default function Banner({ type }) {
                         <option value="thriller">Thriller</option>
                         <option value="animation">Animation</option>
                         <option value="drama">Drama</option>
+                        <option value="general">General</option>
                     </select>
                 </div>
             )}

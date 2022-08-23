@@ -1,3 +1,4 @@
+@import "../../App.scss";
 .listitems {
   width: 250px;
   height: 200px;
@@ -8,6 +9,9 @@
   cursor: pointer;
   z-index:1;
 
+  @include mobile {
+    width: 140px;
+  }
 
   img {
     width: 100%;
@@ -40,6 +44,8 @@
     border-radius: 10px;
     //border: 3px solid #0085ad;
     //transition: height .0s ease;
+
+   
 
     img {
       height: 220px;
@@ -75,11 +81,12 @@
         font-size: 14px;
         font-weight: 600;
         color: white;
+        
   
-          .age_limit {
+          .mov_title {
             border: 1px solid gray;
             padding: 1px 3px;
-            margin: 0 10px;
+            margin: 0 0px;
           }
         }
   

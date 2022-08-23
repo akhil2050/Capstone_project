@@ -1,16 +1,14 @@
 
 import "./home.scss";
-import WidgetSm from "../../components/widgetSm/WidgetSm";
-import WidgetLg from "../../components/widgetLg/WidgetLg";
-
-
+import WidgetSide from "../../components/WidgetSide/WidgetSide";
+import WidgetMain from "../../components/WidgetMain/WidgetMain";
 export default function Home() {
   
   return (
     <div className="home">    
       <div className="homeWidgets">
-        <WidgetSm />
-        <WidgetLg />
+        <WidgetSide />
+        <WidgetMain />
       </div>
     </div>
   );

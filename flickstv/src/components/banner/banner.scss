@@ -1,6 +1,15 @@
+@import "../../app.scss";
 .Banner {
     height: 100vh;
     position: relative;
+
+    @include mobile {
+        height: 50vh;
+      }
+
+      @include tablet {
+        height: 50vh;
+      }
 
     .category {
         position: absolute;
@@ -51,7 +60,10 @@
 
         .shortdesc {
             margin: 10px 0px;
-            width: 80%
+            width: 80%;
+            @include mobile {
+                width: 60vw;
+              }
         }
 
         .infobuttons {

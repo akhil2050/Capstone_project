@@ -8,6 +8,7 @@ const token_verify = require("../token_verify")
 module.exports = router;
 
 router.post("/register", async (req, res) => {
+  console.log(req.body);
   const newUser = new User({
     username: req.body.username,
     useremail: req.body.email,
@@ -49,9 +50,15 @@ router.post("/login", async (req, res) => {
           process.env.SEC_KEY,
           { expiresIn: "7d" }
         );
+        console.log("user.isAdmin", user.isAdmin)
         console.log("acces:", accessTkn)
         const { password, ...logininfo } = user._doc;
-        res.status(200).json(logininfo.useremail + accessTkn);
+        if (user.isAdmin)
+          res.status(200).json(logininfo.useremail + " " + accessTkn + " " + user.isAdmin);
+        else
+          res.status(200).json(logininfo.useremail + " " + accessTkn);
+
+
       }
     }
 

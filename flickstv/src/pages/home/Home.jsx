@@ -9,25 +9,49 @@ import { useState } from 'react';
 
 
 const Home = ({ type }) => {
+  console.log("Type is", type);
+
 
   const [lists, setContentLists] = useState([]);
   const [genre, setGenre] = useState(null);
+  console.log("genre is", genre);
 
   useEffect(() => {
 
     const getScatteredLists = async () => {
 
       try {
-        const res = await axios.get(
-          `lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`,
-          {
-            headers: {
-              token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZTIyN2E5OWFhYWI1NzRhNzhlMjhiNiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NTk0OTQzNzMsImV4cCI6MTY2MDA5OTE3M30.U8lFV8am4gzwRYf8ojabvlWrfhLfE0BHvY0Sus0fmdc"
 
-            },
-          });
-        setContentLists(res.data);
-        console.log("list is", res.data);
+        if (!type) {
+          setGenre(null);
+          console.log("genre bfr", genre);
+        }
+        if (type === "movies" || type === "series") {
+          const res = await axios.get(
+            `lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`,
+            {
+              headers: {
+                token:
+                  "Bearer " + JSON.parse(localStorage.getItem("user")).split(" ")[1],
+
+              },
+            });
+            setContentLists(res.data);
+        }
+        else{
+            const res = await axios.get(
+              "/lists",
+              {
+                headers: {
+                  token:
+                    "Bearer " + JSON.parse(localStorage.getItem("user")).split(" ")[1],
+  
+                },
+              });
+              setContentLists(res.data);
+          
+        }
+        // console.log("list is", res.data);
       } catch (error) {
         console.log(error);
       }
@@ -39,7 +63,7 @@ const Home = ({ type }) => {
   return (
     <div className="home">
       <Navbar />
-      <Banner type={type} />
+      <Banner type={type} setGenre={setGenre} />
 
       {lists.map((list) =>
         (<Lists list={list} />))}

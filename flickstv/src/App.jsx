@@ -16,7 +16,7 @@ import {
 
 function App() {
   const { user } = useContext(UserContext);
-  console.log("inside app.js", user);
+  // console.log("inside app.js", user);
   return (
     //<Login/>
     //<Register/>
@@ -32,6 +32,9 @@ function App() {
         </Route>
         <Route exact path="/login">
           {!user ? <Login /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/register">
+          {!user ? <Register /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/series">
           {user ? <Home type="series" /> : <Redirect to="/login" />}

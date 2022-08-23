@@ -6,20 +6,20 @@ import { useRef, useState } from 'react';
 
 export default function Lists({ list }) {
 
-    console.log("list in jx", list.content);
+    // console.log("list in jx", list.content);
 
     const refList = useRef();
     const [slideNum, setSlideNum] = useState(0);
     const clickHandle = (direction) => {
         let distance = refList.current.getBoundingClientRect().x - 55;
         if (direction === "left" && slideNum > 0) {
-            console.log('d is', refList.current.getBoundingClientRect());
+            // console.log('d is', refList.current.getBoundingClientRect());
             setSlideNum(slideNum - 1);
             refList.current.style.transform = `translateX(${620 + distance}px)`;
 
         }
         if (direction === "right" && slideNum < 2) {
-            console.log('d r is', refList.current.getBoundingClientRect());
+            // console.log('d r is', refList.current.getBoundingClientRect());
             setSlideNum(slideNum + 1);
             refList.current.style.transform = `translateX(${-620 + distance}px)`;
 
@@ -33,7 +33,7 @@ export default function Lists({ list }) {
                 <ArrowBackIosOutlined className='arrow left' onClick={() => clickHandle("left")} />
                 <div className='container' ref={refList}>
                     {/* <Listitems index={0} />
-                    <Listitems index={1} />
+                    <Listitems index={1} /> 
                     <Listitems index={2} />
                     <Listitems index={3} />
                     <Listitems index={4} />

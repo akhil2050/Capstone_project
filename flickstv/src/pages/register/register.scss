@@ -1,3 +1,5 @@
+@import "../../App.scss";
+
 .register {
     width: 100vw;
     height: 100vh;
@@ -9,6 +11,8 @@
       url("https://www.newswire.com/blog/wp-content/uploads/2018/03/media.jpg");
     background-size: cover;
     position: relative;
+
+   
   
     .top {
       .wrapper {
@@ -21,16 +25,16 @@
           height: 40px;
         }
   
-        .loginButton {
-          background-color: #ff8d00;
-          border: none;
-          color: white;
-          border-radius: 5px;
-          padding: 5px 15px;
-          font-size: 16px;
-          font-weight: 500;
-          cursor: pointer;
-        }
+        // .loginButton {
+        //   background-color: #ff8d00;
+        //   border: none;
+        //   color: white;
+        //   border-radius: 5px;
+        //   padding: 5px 15px;
+        //   font-size: 16px;
+        //   font-weight: 500;
+        //   cursor: pointer;
+        // }
       }
     }
   
@@ -45,19 +49,57 @@
       align-items: center;
       justify-content: center;
       color: white;
-  
+      box-sizing: border-box;
+      
+      @include mobile {
+        padding: 15px;
+       }
+       @include tablet {
+        padding: 15px;
+       }
+
       h1 {
         font-size: 50px;
+
+        @include mobile {
+          font-size: 30px;
+          margin-bottom: 15px;
+         }
       }
   
       h2 {
         margin: 20px;
+        @include mobile {
+          margin: 0;
+         }
       }
   
       p {
         font-size: 20px;
       }
-  
+      form.input
+      {
+        @include mobile {
+          flex-direction: column;
+          height: 130px;
+         }
+
+         input 
+         {
+          box-sizing: border-box;
+          @include mobile {
+            width: 100%;
+           }
+         }
+
+         .registerButton{
+          @include mobile {
+            font-size: 16px;
+            width: 100%;
+            padding: 10px;
+           }
+      }
+      }
       .input {
         width: 50%;
         background-color: white;
@@ -66,8 +108,15 @@
         justify-content: space-between;
         margin-top: 20px;
         height: 50px;
-        border-radius: 5px;
+        border-radius: 5px;       
   
+         @include tablet {
+          width: 80%;
+         }
+         @include mobile {
+          width: 100%;
+         }
+
         input{
             flex: 9;
             height: 100%;
@@ -83,8 +132,37 @@
             color: white;
             font-size: 22px;
             cursor: pointer;
+            @include mobile {
+              font-size: 16px;
+             }
         }
       }
+      .regLogin{
+        margin: 20px 0px;
+        font-size: 20px;
+        button{
+          background-color: #ff8d00;
+          border: none;
+          color: white;
+          border-radius: 5px;
+          padding: 5px 15px;
+          font-size: 16px;
+          font-weight: 500;
+          cursor: pointer;
+          margin: 0px 10px;
+        }
+        
+      }
+      .errmsg {
+        color: red;
+        font-weight: bold;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+      .offscreen {
+        position: absolute;
+        left: -9999px;
+    }
     }
   }
   

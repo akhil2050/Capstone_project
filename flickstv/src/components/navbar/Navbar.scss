@@ -20,6 +20,10 @@
         justify-content: space-between;
         font-size: 20px;
 
+        @include mobile {
+            padding: 0px 15px;
+          }
+
         .leftside {
             display: flex;
             align-items: center;
@@ -37,6 +41,9 @@
             img {
                 margin-right: 40px;
                 margin-top: 10px;
+                @include mobile {
+                    display: none;
+                  }
             }
 
         }
